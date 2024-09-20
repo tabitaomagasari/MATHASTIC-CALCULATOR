@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MATHASTIC CALCULATOR</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      .correct {
+        color: green;
+      }
+      .incorrect {
+        color: red;
+      }
+      .input-section {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>MATHASTIC CALCULATOR</h1>
+    <p>Masukkan operasi angka yang ada di kartu:</p>
+
+    <!-- Form untuk operasi bilangan -->
+    <div class="input-section">
+      <label for="operation">Operasi Bilangan:</label>
+      <input
+        type="text"
+        id="operation"
+        placeholder="Masukkan operasi"
+        required
+      />
+    </div>
+
+    <div class="input-section">
+      <label for="userAnswer">Jawaban Kamu:</label>
+      <input
+        type="number"
+        id="userAnswer"
+        placeholder="Masukkan jawaban"
+        required
+      />
+    </div>
+
+    <button id="submitBtn">Submit Jawaban</button>
+
+    <p id="feedback"></p>
+
+    <script>
+      // Ketika tombol submit ditekan
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          // Mengambil input operasi dan jawaban pengguna
+          const operation = document.getElementById("operation").value.trim();
+          const userAnswer = parseFloat(
+            document.getElementById("userAnswer").value.trim()
+          );
+
+          // Area untuk menampilkan feedback
+          const feedback = document.getElementById("feedback");
+
+          try {
+            // Mengevaluasi hasil dari operasi
+            const correctAnswer = eval(operation);
+
+            // Memeriksa apakah jawaban pengguna benar atau salah
+            if (userAnswer === correctAnswer) {
+              feedback.textContent = "Jawaban benar!";
+              feedback.className = "correct";
+            } else {
+              feedback.textContent = `Jawaban salah! Jawaban yang benar adalah ${correctAnswer}.`;
+              feedback.className = "incorrect";
+            }
+          } catch (error) {
+            feedback.textContent =
+              "Operasi tidak valid! Silakan masukkan operasi yang benar (contoh: 5 + 3).";
+            feedback.className = "incorrect";
+          }
+        });
+    </script>
+  </body>
+</html>
